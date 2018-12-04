@@ -53,7 +53,9 @@ raw = raw{3}; target = target{3};
 l3r = l3Render();
 cfa = cameraGet(l3d.camera, 'sensor cfa pattern');
 outImg = l3r.render(raw, cfa, l3t);
-
+disp(size(outImg));
+disp(size(target));
+disp(size(raw));
 vcNewGraphWin([], 'wide');
 subplot(1, 3, 1); imshow(sceneGet(l3d.sources{1}, 'rgb image')); 
 title('Optical Image');

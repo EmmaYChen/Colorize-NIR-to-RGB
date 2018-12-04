@@ -43,7 +43,6 @@ irSensor = sensorSet(irSensor,'name','IR');
 
 %% Parse all the Image in nir foler
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 current_dir = pwd;
 nir_database_dir = [current_dir,'/nir/'];
 S = dir(fullfile(nir_database_dir,'*.mat')); 
@@ -51,7 +50,7 @@ S = dir(fullfile(nir_database_dir,'*.mat'));
 for k = 1:numel(S)
     disp(S(k).name);
     filename = S(k).name;
-    image = load(filename);
+    image = load([nir_database_dir,filename]);
     scene = sceneFromBasis(image);
     scene = sceneInterpolateW(scene,wave);
 
@@ -67,7 +66,7 @@ for k = 1:numel(S)
     % ieAddObject(irSensor); sensorWindow;
 
     %% Show them image processed
-    disp('here')
+    % disp('here')
     ip = ipCreate;
     ipIR = ipCompute(ip,irSensor);
     ipRGB = ipCompute(ip,rgbSensor);
@@ -80,6 +79,10 @@ for k = 1:numel(S)
     ir_sensor_data = irSensor.data.volts;
     save_ir_dir = [current_dir, '/IRSensorData/', 'ir_',filename];
     save(save_ir_dir, 'ir_sensor_data')
+    
+    ir_image_data = ipIR.data.result;
+    save_irImg_dir = [current_dir, '/IRImageData/', 'irImg_',filename];
+    save(save_irImg_dir, 'ir_image_data')
 
     rgb_image_data = ipRGB.data.result;
     save_RGB_dir = [current_dir,'/RGBImageData/','rgb_',filename];
