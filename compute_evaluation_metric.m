@@ -18,10 +18,9 @@ function mean = compute_evaluation_metric(target, output, patchSize)
         for j = 1:col
             count = count + 1;
             pixel = diff(i,j,:);
-            labsum =  sumsqr(pixel);
+            labsum =  sum(pixel.^2);
             deltaE = deltaE + sqrt(labsum);
         end
     end
-    
     mean = deltaE/count;
 end

@@ -53,10 +53,9 @@ irSensor = sensorCompute(irSensor,oi);
 ieAddObject(rgbSensor); sensorWindow;
 ieAddObject(irSensor); sensorWindow;
 
-ip = ipCreate;
-ipIR = ipCompute(ip,irSensor);
+
+ip = ipCreate;ipIR = ipCompute(ip,irSensor);
 ipRGB = ipCompute(ip,rgbSensor);
 ieAddObject(ipIR); ieAddObject(ipRGB); ipWindow;
-
 
 
